@@ -76,7 +76,8 @@
             let resultHTML = "";
 
             if (mode === "before") {
-                // For before cooking: protein * 1.33, carbs * 1.43
+                // البروتين يفقد 25% من وزنه، لذا نقوم بضربه بـ 1.33
+                // الكربوهيدرات تفقد حوالي 30% من وزنها، لذا نقوم بضربها بـ 1.43
                 if (!isNaN(protein)) {
                     resultHTML += `<p>البروتين قبل الطبخ: ${(protein * 1.33).toFixed(2)} جرام</p>`;
                 }
@@ -84,7 +85,8 @@
                     resultHTML += `<p>الكربوهيدرات قبل الطبخ: ${(carbs * 1.43).toFixed(2)} جرام</p>`;
                 }
             } else {
-                // For after cooking: protein * 0.75, carbs * 0.70
+                // البروتين بعد الطبخ يفقد 25% من وزنه، لذا نقوم بضربه بـ 0.75
+                // الكربوهيدرات بعد الطبخ تفقد حوالي 30% من وزنها، لذا نقوم بضربها بـ 0.70
                 if (!isNaN(protein)) {
                     resultHTML += `<p>البروتين بعد الطبخ: ${(protein * 0.75).toFixed(2)} جرام</p>`;
                 }
