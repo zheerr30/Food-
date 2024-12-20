@@ -50,8 +50,8 @@
         
         <label for="mode">اختر نوع الحساب:</label>
         <select id="mode">
-            <option value="before">حساب القيم بعد الطبخ</option>
-            <option value="after">حساب القيم قبل الطبخ</option>
+            <option value="before">حساب القيم قبل الطبخ</option>
+            <option value="after">حساب القيم بعد الطبخ</option>
         </select>
 
         <div id="inputs">
@@ -76,18 +76,20 @@
             let resultHTML = "";
 
             if (mode === "before") {
+                // For before cooking: protein * 1.33, carbs * 1.43
+                if (!isNaN(protein)) {
+                    resultHTML += `<p>البروتين قبل الطبخ: ${(protein * 1.33).toFixed(2)} جرام</p>`;
+                }
+                if (!isNaN(carbs)) {
+                    resultHTML += `<p>الكربوهيدرات قبل الطبخ: ${(carbs * 1.43).toFixed(2)} جرام</p>`;
+                }
+            } else {
+                // For after cooking: protein * 0.75, carbs * 0.70
                 if (!isNaN(protein)) {
                     resultHTML += `<p>البروتين بعد الطبخ: ${(protein * 0.75).toFixed(2)} جرام</p>`;
                 }
                 if (!isNaN(carbs)) {
-                    resultHTML += `<p>الكربوهيدرات بعد الطبخ: ${(carbs * 0.75).toFixed(2)} جرام</p>`;
-                }
-            } else {
-                if (!isNaN(protein)) {
-                    resultHTML += `<p>البروتين قبل الطبخ: ${(protein / 0.75).toFixed(2)} جرام</p>`;
-                }
-                if (!isNaN(carbs)) {
-                    resultHTML += `<p>الكربوهيدرات قبل الطبخ: ${(carbs / 0.75).toFixed(2)} جرام</p>`;
+                    resultHTML += `<p>الكربوهيدرات بعد الطبخ: ${(carbs * 0.70).toFixed(2)} جرام</p>`;
                 }
             }
 
