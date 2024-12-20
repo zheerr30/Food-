@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة القيم الغذائية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button, select {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: linear-gradient(45deg, #ffa500, #8a2be2);
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #ff8c00, #7a1fa2);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>حاسبة القيم الغذائية</h2>
+        
+        <label for="mode">اختر نوع الحساب:</label>
+        <select id="mode">
+            <option value="before">حساب القيم بعد الطبخ</option>
+            <option value="after">حساب القيم قبل الطبخ</option>
+        </select>
+
+        <div id="inputs">
+            <label for="protein">البروتين (جرام):</label>
+            <input type="number" id="protein" placeholder="أدخل كمية البروتين">
+
+            <label for="carbs">الكربوهيدرات (جرام):</label>
+            <input type="number" id="carbs" placeholder="أدخل كمية الكربوهيدرات">
+        </div>
+
+        <button onclick="calculate()">احسب القيم</button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const mode = document.getElementById("mode").value;
+            const protein = parseFloat(document.getElementById('protein').value);
+            const carbs = parseFloat(document.getElementById('carbs').value);
+
+            let resultHTML = "";
+
+            if (mode === "before") {
+                if (!isNaN(protein)) {
+                    resultHTML += `<p>البروتين بعد الطبخ: ${(protein * 0.75).toFixed(2)} جرام</p>`;
+                }
+                if (!isNaN(carbs)) {
+                    resultHTML += `<p>الكربوهيدرات بعد الطبخ: ${(carbs * 0.75).toFixed(2)} جرام</p>`;
+                }
+            } else {
+                if (!isNaN(protein)) {
+                    resultHTML += `<p>البروتين قبل الطبخ: ${(protein / 0.75).toFixed(2)} جرام</p>`;
+                }
+                if (!isNaN(carbs)) {
+                    resultHTML += `<p>الكربوهيدرات قبل الطبخ: ${(carbs / 0.75).toFixed(2)} جرام</p>`;
+                }
+            }
+
+            if (resultHTML === "") {
+                resultHTML = '<p style="color: red;">رجاءً أدخل البروتين أو الكربوهيدرات لحساب القيم.</p>';
+            }
+
+            document.getElementById('result').innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>
